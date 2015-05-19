@@ -1,0 +1,6 @@
+rm -rf _rel/*
+rm ebin/*
+make rel
+cp conf/* _rel/releases/2/
+./_rel/bin/wschat start
+./_rel/bin/wschat attach

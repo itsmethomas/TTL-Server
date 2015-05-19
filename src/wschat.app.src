@@ -1,0 +1,29 @@
+{application, wschat, [
+		       {description, "TTL chat server"},
+		       {vsn, "2"},
+		       {modules, []},
+		       {registered, [websocket_sup]},
+		       {applications, [
+				       kernel,
+				       stdlib,
+				       cowboy,
+				       sasl, 
+				       mnesia, 
+				       inets,
+				       lager,
+				       jsx,
+				       asn1, 
+				       ex_apns,
+				       public_key,
+				       ssl,
+				       cqerl,
+				       snappy,
+				       lz4,
+				       semver,
+				       uuid,
+				       pooler,
+				       os_mon
+				      ]},
+		       {mod, {wschat_app, []}},
+		       {env, []}
+		      ]}.
