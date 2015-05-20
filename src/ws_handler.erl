@@ -606,7 +606,7 @@ try_register(Type, LUser, PN, DeviceId, State, MsgId) ->
          make_response(Type, contact_support, MsgId)
     end.
 
-send_reg_sms(Type, _, <<>>, _, MsgId) -> make_response(Type, invalid_syntax, MsgId);
+%send_reg_sms(Type, _, <<>>, _, MsgId) -> make_response(Type, invalid_syntax, MsgId);
 
 
 send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
