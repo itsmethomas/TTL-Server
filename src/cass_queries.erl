@@ -156,6 +156,7 @@ get_user_registeration_number(User) ->
 
 get_user_registered_info(User) ->
     Q = <<"SELECT device_id, number FROM user_data WHERE username = ? ;">>,
+	?INFO_MSG("get_user_registered_info query ~p ~n",[Q]),
     Vals =[{username, User}],
     case get_cass_prep_query_result(Q, Vals) of
       [[{device_id, D}, {number, N}]] -> {D, N};
