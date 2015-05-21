@@ -23,7 +23,7 @@ start(_Type, _Args) ->
                                      {attributes, record_info(fields, reg_tokens)}]),
     mnesia:create_table(board, [{disc_copies, [node()]},
                                 {attributes, record_info(fields, board)}]),
-	?INFO_MSG("WSChat app is started..."),
+	?INFO_MSG("WSChat app is started...", []),
     upgrade_handler(ws_handler),
     websocket_sup:start_link().
 
