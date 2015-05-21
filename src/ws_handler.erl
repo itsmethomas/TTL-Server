@@ -610,20 +610,17 @@ try_register(Type, LUser, PN, DeviceId, State, MsgId) ->
 
 
 send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
-%%     Token = random_token:get_token(),
-%% 	cass_queries:save_pin_for_user(LUser, Token),
-%%     make_response(Type, Resp, MsgId).
+	mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = <<"1234">>}),
+    make_response(Type, Resp, MsgId).
 
-%% 	?INFO_MSG("Random Token ~p ~n", [Token]),
-
-   Token = random_token:get_token(),
-   case nexmo_push:push_sms(_PN, Token) of
-     ok ->
-       mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = Token}),
-       make_response(Type, Resp, MsgId);
-     error ->
-        make_response(Type, nexmo_push_error, MsgId)
-   end.
+%%    Token = random_token:get_token(),
+%%    case nexmo_push:push_sms(_PN, Token) of
+%%      ok ->
+%%        mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = Token}),
+%%        make_response(Type, Resp, MsgId);
+%%      error ->
+%%         make_response(Type, nexmo_push_error, MsgId)
+%%    end.
 
 verify_account(Type, LUser, PN, DeviceId, Pass, Token, State, MsgId) ->
     case mnesia:dirty_read(reg_tokens, LUser) of
