@@ -14,7 +14,7 @@
 start(_Type, _Args) -> 
     ws_config:start(),
     aws_s3:start(),
-    mod_push:start(),
+%%     mod_push:start(),
     mnesia:create_table(session, [{ram_copies, [node()]},
                                   {attributes, record_info(fields, session)}]),
     mnesia:create_table(muc_room, [{disc_copies, [node()]},
