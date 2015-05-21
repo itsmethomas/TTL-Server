@@ -3,7 +3,6 @@
 %% wschat cass query api exports
 
 -export([store_offline/3,
-		 cass_test/3,
          get_offline_msgs/1,
          remove_offline_msg/2,
          set_default_data/2,
@@ -59,13 +58,6 @@
 -include("wschat.hrl").
 
 %% wschat cassandra query exports
-
-cass_test(User, Id, Msg) ->
-	Q = <<"INSERT into offline(username, msg_id, msg) VALUES(?, ?, ?) ;">>,
-    Vals = [{username, User},
-            {msg_id, Id},
-            {msg, Msg}],
-    send_cass_prep_query(Q, Vals).
 
 store_conversation_to(User, OtherID, Ts, Msg, Type, MsgId, Direction) ->
     Q = <<"INSERT INTO conversation(username, other_id, ts, msg, type, msg_id, direction) VALUES(?, ?, ?, ?, ?, ?, ?);">>,
