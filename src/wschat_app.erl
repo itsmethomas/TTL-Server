@@ -19,12 +19,11 @@ start(_Type, _Args) ->
                                   {attributes, record_info(fields, session)}]),
     mnesia:create_table(muc_room, [{disc_copies, [node()]},
                                    {attributes, record_info(fields, muc_room)}]),
-    mnesia:create_table(reg_tokens, [{disc_copies, [node()]},
+    mnesia:create_table(reg_tokens, [{ram_copies, [node()]},
                                      {attributes, record_info(fields, reg_tokens)}]),
     mnesia:create_table(board, [{disc_copies, [node()]},
                                 {attributes, record_info(fields, board)}]),
 	
-	mnesia:dirty_write(session, #session{user = "LUser", pids = []}),
 	?INFO_MSG("WSChat app is started... ~p ~n", [node()]),
     upgrade_handler(ws_handler),
     websocket_sup:start_link().
