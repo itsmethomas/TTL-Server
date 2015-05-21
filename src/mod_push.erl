@@ -112,7 +112,7 @@ get_timestamp_for_device_token() ->
     SecondsInit = calendar:datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}),
     SecondsNow - SecondsInit.
 
-get_expiration_time_in_secs() ->
-    SecondsNow = calendar:datetime_to_gregorian_seconds(calendar:now_to_local_time(now())),
-    SecondsInit = calendar:datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}),
-    (SecondsNow - SecondsInit) + 86400.
+%% get_expiration_time_in_secs() ->
+%%     SecondsNow = calendar:datetime_to_gregorian_seconds(calendar:now_to_local_time(now())),
+%%     SecondsInit = calendar:datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}),
+%%     (SecondsNow - SecondsInit) + 86400.
