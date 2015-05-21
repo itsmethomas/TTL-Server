@@ -432,28 +432,29 @@ update_referral_count(User) ->
 
 get_cass_query_result(Q) ->
     io:format("~p ~n",[Q]),
-    {ok, Client} = cqerl:new_client({"127.0.0.1", 9042}, [{keyspace, "ttl"}]),
+    {ok, Client} = cqerl:new_client(),
     {ok, Result} = cqerl:run_query(Client, Q),
     cqerl:all_rows(Result).
 
 get_cass_prep_query_result(Q, Vals) ->
-    {ok, Client} = cqerl:new_client({"127.0.0.1", 9042}, [{keyspace, "ttl"}]),
+    {ok, Client} = cqerl:new_client(),
     {ok, Result} = cqerl:run_query(Client, #cql_query{statement = Q, values = Vals}),
     cqerl:all_rows(Result).
 
 send_cass_query(Q) ->
     io:format("~p ~n",[Q]),
-    {ok, Client} = cqerl:new_client({"127.0.0.1", 9042}, [{keyspace, "ttl"}]),
+    {ok, Client} = cqerl:new_client(),
     cqerl:send_query(Client, Q),
     cqerl:close_client(Client).
 
 send_cass_prep_query(Q, Vals) ->
-    {ok, Client} = cqerl:new_client({"127.0.0.1", 9042}, [{keyspace, "ttl"}]),
+    {ok, Client} = cqerl:new_client(),
     cqerl:run_query(Client, #cql_query{statement = Q, values = Vals}),
     cqerl:close_client(Client).
 
 send_cass_batch_queries(Queries) ->
-   {ok, Client} = cqerl:new_client({"127.0.0.1", 9042}, [{keyspace, "ttl"}]),
+%%    {ok, Client} = cqerl:new_client({"127.0.0.1", 9042}, [{keyspace, "ttl"}]),
+   {ok, Client} = cqerl:new_client(),
    cqerl:run_query(Client, #cql_query_batch{mode = ?CQERL_BATCH_UNLOGGED, queries = Queries}),
    cqerl:close_client(Client).
 
