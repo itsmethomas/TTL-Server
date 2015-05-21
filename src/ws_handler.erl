@@ -621,7 +621,7 @@ send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
 %%        make_response(Type, Resp, MsgId);
 %%      error ->
 %%         make_response(Type, nexmo_push_error, MsgId)
-%%    end.
+   end.
 
 verify_account(Type, LUser, PN, DeviceId, Pass, Token, State, MsgId) ->
     case mnesia:dirty_read(reg_tokens, LUser) of
