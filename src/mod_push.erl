@@ -105,8 +105,7 @@ push(User, Msg) ->
 
 push_apple(Token, Msg) when (Token /= <<>>) ->
     Payload = jsx:encode([{<<"aps">>, [{<<"alert">>, Msg}, {<<"badge">>, 0}, {<<"sound">>, <<"default">>}]}]),
-%%     ExpT = get_expiration_time_in_secs(),
-    ex_apns:send(apple, Token, Payload).%, ExpT).
+    ex_apns:send(apple, Token, Payload).
 
 get_timestamp_for_device_token() ->
     SecondsNow = calendar:datetime_to_gregorian_seconds(calendar:now_to_local_time(now())),
