@@ -23,7 +23,7 @@ ex_apns:start(apple, ws_config:get_local_option(ios_profile),
                 {ws_config:get_local_option(ios_push_cert), ws_config:get_local_option(ios_cert_pass)}),
 
 %%     ex_apns:start(apple, ws_config:get_local_option(ios_profile), 
-                  ws_config:get_local_option(ios_push_cert)),
+%%                   ws_config:get_local_option(ios_push_cert)),
   nexmo_push:start(),
   register(apple_token_cleaner, spawn(?MODULE, feedback, [undefined])),
   mnesia:create_table(user_token, [{disc_copies, [node()]},
