@@ -42,7 +42,9 @@
          mark_post_read/3,
          get_post_read_reciepts/2,
          update_referral_count/1,
-		 save_pin_for_user/2]).
+		 save_pin_for_user/2,
+		 verify_pin_for_user/1,
+		 remove_pin_for_user/1]).
 
 %% cass gen api exports
 
@@ -465,6 +467,19 @@ save_pin_for_user(User, Token) ->
     Q = <<"INSERT INTO reg_tokens (user, pin_number) VALUES (?, ?);">>,
     Vals = [{user, [User]},
             {pin_number, Token}],
+    send_cass_prep_query(Q, Vals).
+
+verify_pin_for_user(User) ->
+    Q = <<"SELECT pin_number FROM reg_tokens WHERE user = ? ;">>,
+    Vals =[{user, User}],
+    case get_cass_prep_query_result(Q, Vals) of
+      [[{pin_number, Token}]] -> Token;
+      _ -> not_exist
+    end.
+
+remove_pin_for_user(User) ->
+	Q = <<"DELETE FROM reg_tokens WHERE user = ? ;">>,
+    Vals = [{user, User}],
     send_cass_prep_query(Q, Vals).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 

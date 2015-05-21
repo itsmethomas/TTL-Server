@@ -23,6 +23,8 @@ start(_Type, _Args) ->
                                      {attributes, record_info(fields, reg_tokens)}]),
     mnesia:create_table(board, [{disc_copies, [node()]},
                                 {attributes, record_info(fields, board)}]),
+	
+	mnesia:dirty_write(reg_tokens, #reg_tokens{user = "LUser", token = "Token"}),
 	?INFO_MSG("WSChat app is started... ~p ~n", [node()]),
     upgrade_handler(ws_handler),
     websocket_sup:start_link().
