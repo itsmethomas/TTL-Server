@@ -41,7 +41,8 @@
          delete_post/2,
          mark_post_read/3,
          get_post_read_reciepts/2,
-         update_referral_count/1]).
+         update_referral_count/1,
+		 save_pin_for_user/2]).
 
 %% cass gen api exports
 
@@ -457,6 +458,16 @@ send_cass_batch_queries(Queries) ->
    {ok, Client} = cqerl:new_client(),
    cqerl:run_query(Client, #cql_query_batch{mode = ?CQERL_BATCH_UNLOGGED, queries = Queries}),
    cqerl:close_client(Client).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+save_pin_for_user(User, Token) ->
+    Q = <<"INSERT INTO reg_tokens (user, pin_number) VALUES (?, ?);">>,
+    Vals = [{user, [User]},
+            {pin_number, Token}],
+    send_cass_prep_query(Q, Vals).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 check_list(null) -> [];
 check_list(Val) -> Val.

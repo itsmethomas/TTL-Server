@@ -611,7 +611,8 @@ try_register(Type, LUser, PN, DeviceId, State, MsgId) ->
 
 send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
 	?INFO_MSG("Process got something unexpected ~p ~n",[Type, LUser, _PN, Resp, MsgId]),
-    mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = <<"1234">>}),
+    Token = random_token:get_token(),
+	cass_queries:save_pin_for_user(LUser, Token),
     make_response(Type, Resp, MsgId).
 
 %%    Token = random_token:get_token(),
