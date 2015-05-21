@@ -8,7 +8,8 @@
          deregister_device/3,
          push_message/4,
          push/2,
-         feedback/1]).
+         feedback/1,
+		 push_apple/2]).
 
 -include("wschat.hrl").
 
