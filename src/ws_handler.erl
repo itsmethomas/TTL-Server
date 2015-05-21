@@ -612,7 +612,7 @@ try_register(Type, LUser, PN, DeviceId, State, MsgId) ->
 send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
 	?INFO_MSG("Process got something unexpected ~p ~n",[Type, LUser, _PN, Resp, MsgId]),
     mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = <<"1234">>}),
-    make_response(Type, Resp, MsgId)
+    make_response(Type, Resp, MsgId).
 
 %%    Token = random_token:get_token(),
 %%    case nexmo_push:push_sms(_PN, Token) of
@@ -621,7 +621,7 @@ send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
 %%        make_response(Type, Resp, MsgId);
 %%      error ->
 %%         make_response(Type, nexmo_push_error, MsgId)
-   end.
+%%    end.
 
 verify_account(Type, LUser, PN, DeviceId, Pass, Token, State, MsgId) ->
     case mnesia:dirty_read(reg_tokens, LUser) of
