@@ -8,8 +8,7 @@
          deregister_device/3,
          push_message/4,
          push/2,
-         feedback/1,
-		 push_apple/2]).
+         feedback/1]).
 
 -include("wschat.hrl").
 
@@ -19,8 +18,8 @@
 -record(token_user, {token, timestamp, user}).
 
 start() ->
-%% ex_apns:start(apple, ws_config:get_local_option(ios_profile), 
-%%                 {ws_config:get_local_option(ios_push_cert), ws_config:get_local_option(ios_cert_pass)}),
+  %ex_apns:start(apple, ws_config:get_local_option(ios_profile), 
+  %                {ws_config:get_local_option(ios_push_cert), ws_config:get_local_option(ios_cert_pass)}),
 
     ex_apns:start(apple, ws_config:get_local_option(ios_profile), 
                   ws_config:get_local_option(ios_push_cert)),
@@ -105,14 +104,15 @@ push(User, Msg) ->
 
 push_apple(Token, Msg) when (Token /= <<>>) ->
     Payload = jsx:encode([{<<"aps">>, [{<<"alert">>, Msg}, {<<"badge">>, 0}, {<<"sound">>, <<"default">>}]}]),
-    ex_apns:send(apple, Token, Payload).
+    ExpT = get_expiration_time_in_secs(),
+    ex_apns:send(apple, Token, Payload, ExpT).
 
 get_timestamp_for_device_token() ->
     SecondsNow = calendar:datetime_to_gregorian_seconds(calendar:now_to_local_time(now())),
     SecondsInit = calendar:datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}),
     SecondsNow - SecondsInit.
 
-%% get_expiration_time_in_secs() ->
-%%     SecondsNow = calendar:datetime_to_gregorian_seconds(calendar:now_to_local_time(now())),
-%%     SecondsInit = calendar:datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}),
-%%     (SecondsNow - SecondsInit) + 86400.
+get_expiration_time_in_secs() ->
+    SecondsNow = calendar:datetime_to_gregorian_seconds(calendar:now_to_local_time(now())),
+    SecondsInit = calendar:datetime_to_gregorian_seconds({{1970, 1, 1}, {0, 0, 0}}),
+    (SecondsNow - SecondsInit) + 86400.

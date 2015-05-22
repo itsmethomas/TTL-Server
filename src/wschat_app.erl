@@ -15,17 +15,14 @@ start(_Type, _Args) ->
     ws_config:start(),
     aws_s3:start(),
     mod_push:start(),
-  	mod_push:push_apple(<<"a449ecfdf08a07c2776a8c3083763b462b0d33189e02c62729c61da074e321c9">>, <<"Erlang Message Test">>),
-	
     mnesia:create_table(session, [{ram_copies, [node()]},
                                   {attributes, record_info(fields, session)}]),
     mnesia:create_table(muc_room, [{disc_copies, [node()]},
                                    {attributes, record_info(fields, muc_room)}]),
-    mnesia:create_table(reg_tokens, [{ram_copies, [node()]},
+    mnesia:create_table(reg_tokens, [{disc_copies, [node()]},
                                      {attributes, record_info(fields, reg_tokens)}]),
     mnesia:create_table(board, [{disc_copies, [node()]},
                                 {attributes, record_info(fields, board)}]),
-	
     upgrade_handler(ws_handler),
     websocket_sup:start_link().
 

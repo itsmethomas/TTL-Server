@@ -116,5 +116,4 @@ db_init() ->
         _ ->
             ok
     end,
-	?INFO_MSG("DB Init.... ~p ~n", [extra_db_nodes]),
     mnesia:wait_for_tables(mnesia:system_info(local_tables), infinity).

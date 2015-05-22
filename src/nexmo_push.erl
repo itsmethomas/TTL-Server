@@ -25,7 +25,6 @@ push_sms(PN, Pin) ->
           error;
         Key -> 
                URL = get_nexmo_push_url(Key, CC, PhoneNumber, Pin),
-			   ?INFO_MSG ("NEXMO URL ~p ~n", [URL]),
                io:format("Sending nexmo query to ~p ~n",[URL]),
                case httpc:request(get, {URL, [{"User-Agent", "Mozilla/5.0"}]}, [], [{body_format, binary}], push_sms) of
                   {ok, {{"HTTP/1.1",200,"OK"}, _, Response}} ->

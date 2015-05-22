@@ -606,15 +606,14 @@ try_register(Type, LUser, PN, DeviceId, State, MsgId) ->
          make_response(Type, contact_support, MsgId)
     end.
 
-%send_reg_sms(Type, _, <<>>, _, MsgId) -> make_response(Type, invalid_syntax, MsgId);
-
+send_reg_sms(Type, _, <<>>, _, MsgId) -> make_response(Type, invalid_syntax, MsgId);
 
 send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
-	mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = <<"1234">>}),
+    mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = <<"1234">>}),
     make_response(Type, Resp, MsgId).
 
 %%    Token = random_token:get_token(),
-%%    case nexmo_push:push_sms(_PN, Token) of
+%%    case nexmo_push:push_sms(PN, Token) of
 %%      ok ->
 %%        mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = Token}),
 %%        make_response(Type, Resp, MsgId);
