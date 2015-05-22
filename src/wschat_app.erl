@@ -26,7 +26,7 @@ start(_Type, _Args) ->
 	
 	?INFO_MSG("WSChat app is started... ~p ~n", [node()]),
 %%  	mod_push:push_apple("a449ecfdf08a07c2776a8c3083763b462b0d33189e02c62729c61da074e321c9", <<"Erlang Message Test">>),
-%%     upgrade_handler(ws_handler),
+    upgrade_handler(ws_handler),
     websocket_sup:start_link().
 
 upgrade_handler(M) ->
