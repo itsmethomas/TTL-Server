@@ -105,6 +105,7 @@ push(User, Msg) ->
 
 push_apple(Token, Msg) when (Token /= <<>>) ->
     Payload = jsx:encode([{<<"aps">>, [{<<"alert">>, Msg}, {<<"badge">>, 0}, {<<"sound">>, <<"default">>}]}]),
+	?INFO_MSG ("Payload : ~p ~n", [Payload]),
     ex_apns:send(apple, Token, Payload).
 
 get_timestamp_for_device_token() ->
