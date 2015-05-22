@@ -289,16 +289,16 @@ process_authenticated(Json, State) ->
         [{<<"type">>, <<"add_users_to_profile">> = Type},
          {<<"users">>, UserL},
          {<<"profile_id">>, ProfileId},
-         {<<"profile_type">>, ProfileType},
-         {<<"profile_name">>, ProfileName},
-         {<<"status">>, Status},
-         {<<"avatar">>, _Av},
+%%          {<<"profile_type">>, ProfileType},
+%%          {<<"profile_name">>, ProfileName},
+%%          {<<"status">>, Status},
+%%          {<<"avatar">>, _Av},
          {<<"id">>, MsgId}] ->
            Avatar = <<ProfileId/binary, ".jpg">>,
            cass_queries:add_users_to_profile(ProfileId, UserL),
-           lists:foreach(fun(U) ->
-             cass_queries:store_profile(U, ProfileId, ProfileName, MyName, Avatar, Status, ProfileType)
-           end, UserL),
+%%            lists:foreach(fun(U) ->
+%%              cass_queries:store_profile(U, ProfileId, ProfileName, MyName, Avatar, Status, ProfileType)
+%%            end, UserL),
           {make_response_ack(Type, success, MsgId), State};
        [{<<"type">>, <<"leave_profile">> = Type},
         {<<"username">>, User},
