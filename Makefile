@@ -1,6 +1,6 @@
 PROJECT = wschat
 
-DEPS = cowboy lager jsx cqerl ex_apns
+DEPS = cowboy lager jsx cqerl ex_apns apns4erl
 dep_cowboy = git https://github.com/ninenines/cowboy 1.0.0
 dep_lager = https://github.com/basho/lager.git 
 dep_jsx = git https://github.com/talentdeficit/jsx.git v1.4.5
