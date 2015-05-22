@@ -22,8 +22,7 @@
 				       semver,
 				       uuid,
 				       pooler,
-				       os_mon,
-				       apns4erl
+				       os_mon
 				      ]},
 		       {mod, {wschat_app, []}},
 		       {env, []}
