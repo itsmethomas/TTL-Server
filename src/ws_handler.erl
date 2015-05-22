@@ -294,7 +294,7 @@ process_authenticated(Json, State) ->
 %%          {<<"status">>, Status},
 %%          {<<"avatar">>, _Av},
          {<<"id">>, MsgId}] ->
-           Avatar = <<ProfileId/binary, ".jpg">>,
+%%            Avatar = <<ProfileId/binary, ".jpg">>,
            cass_queries:add_users_to_profile(ProfileId, UserL),
 %%            lists:foreach(fun(U) ->
 %%              cass_queries:store_profile(U, ProfileId, ProfileName, MyName, Avatar, Status, ProfileType)
