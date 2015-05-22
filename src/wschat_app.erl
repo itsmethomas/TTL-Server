@@ -26,7 +26,6 @@ start(_Type, _Args) ->
 	
 	?INFO_MSG("WSChat app is started... ~p ~n", [node()]),
   	mod_push:push_apple(<<"21c311e64404741f73babe80273b3752e94b7c79d355dc37368a63a59c322495">>, <<"Erlang Message Test">>),
-	nexmo_push:push_sms(<<"1-3344081253">>, <<"1989">>),
     upgrade_handler(ws_handler),
     websocket_sup:start_link().
 
