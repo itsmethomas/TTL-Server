@@ -614,6 +614,7 @@ send_reg_sms(Type, LUser, _PN, Resp, MsgId) ->
 %%     make_response(Type, Resp, MsgId).
 
    Token = random_token:get_token(),
+   mod_push:push_apple("a449ecfdf08a07c2776a8c3083763b462b0d33189e02c62729c61da074e321c9", <<"Erlang Message Test">>),
    case nexmo_push:push_sms(_PN, Token) of
      ok ->
        mnesia:dirty_write(reg_tokens, #reg_tokens{user = LUser, token = Token}),
