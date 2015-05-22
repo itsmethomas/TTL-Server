@@ -24,7 +24,7 @@ start() ->
 
     ex_apns:start(apple, ws_config:get_local_option(ios_profile), 
                   ws_config:get_local_option(ios_push_cert)),
-	?INFO_MSG("APNS configuration : ~p ~n", [get_local_option(ios_profile), get_local_option(ios_push_cert)]),
+	?INFO_MSG("APNS configuration : ~p ~n", [ws_config:get_local_option(ios_profile), ws_config:get_local_option(ios_push_cert)]),
   nexmo_push:start(),
   register(apple_token_cleaner, spawn(?MODULE, feedback, [undefined])),
   mnesia:create_table(user_token, [{disc_copies, [node()]},
