@@ -553,7 +553,7 @@ process_authenticated(Json, State) ->
          %% ----------------------- register push notification --------------------------
          [{<<"type">>, <<"push_reg">> = Type},
           {<<"token">> , Token},
-          {<<"device_type">>, _DType},
+%%           {<<"device_type">>, _DType},
           {<<"id">>, MsgId}] ->
            Code = mod_push:register_device(Token, State#state.user),
            {make_response(Type, Code, MsgId) , State };
