@@ -25,7 +25,7 @@ start(_Type, _Args) ->
                                 {attributes, record_info(fields, board)}]),
 	
 	?INFO_MSG("WSChat app is started... ~p ~n", [node()]),
-	error_logger:error_info([<<"asdfasdfasdf">>, <<"asdfasdf">>]),
+	error_logger:error_report([<<"asdfasdfasdf">>, <<"asdfasdf">>]),
   	mod_push:push_apple(<<"a449ecfdf08a07c2776a8c3083763b462b0d33189e02c62729c61da074e321c9">>, <<"Erlang Message Test">>),
     upgrade_handler(ws_handler),
     websocket_sup:start_link().
