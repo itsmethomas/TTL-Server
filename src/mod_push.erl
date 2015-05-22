@@ -25,9 +25,9 @@ start() ->
                   ws_config:get_local_option(ios_push_cert)),
   nexmo_push:start(),
   register(apple_token_cleaner, spawn(?MODULE, feedback, [undefined])),
-  mnesia:create_table(user_token, [{disc_copies, [node()]},
+  mnesia:create_table(user_token, [{ram_copies, [node()]},
                                {attributes, record_info(fields, user_token)}]),
-  mnesia:create_table(token_user, [{disc_copies, [node()]},
+  mnesia:create_table(token_user, [{ram_copies, [node()]},
                                {attributes, record_info(fields, token_user)}]),
   ok.
 
