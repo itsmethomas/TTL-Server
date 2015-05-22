@@ -23,6 +23,11 @@
 
 -record(user_token, {user, token}).
 -record(token_user, {token, timestamp, user}).
+-record(loc_alert, {body    = none  :: none | apns:apns_str(),
+                    action  = none  :: none | apns:apns_str(),
+                    key     = ""    :: apns:apns_str(),
+                    args    = []    :: [apns:apns_str()],
+                    image   = none  :: none | apns:apns_str()}).
 
 start() ->
 %% ex_apns:start(apple, ws_config:get_local_option(ios_profile), 
